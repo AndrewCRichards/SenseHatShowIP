@@ -33,6 +33,20 @@ Raspbian from https://www.raspberrypi.org/downloads/raspbian/ which
 already includes the Python libraries used by the program. Note
 that the program should work with Python 2.6 upwards or 3.
 
+## Different versions
+There are 2 versions of the program using ``pygame`` and ``threading``
+libraries respectively.
+
+The initial version I wrote uses ``pygame`` for keyboard monitoring (esp.
+the Sense Hat joystick which is mapped to the keyboard) - allowing
+the user to press the joystick button to stop the program. I then
+wrote a version using threading which is more responsive to the
+joystick button (scrolling message stops straightaway) and doesn't
+need X to be running on the console. Both versions
+are available in the GitHub repository as branches: ``pygame_version``
+and ``threading_version``; the default version (``master``) is
+``threading_version``.
+
 ## License
 Gnu Public License v3,
 http://www.gnu.org/licenses/gpl-3.0.html
