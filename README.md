@@ -8,9 +8,9 @@ The intended usage is as a program that can be included during startup
 of a Raspberry Pi with Sense Hat attached, enabling the Pi to announce
 its' IP address so that a remote system can use the IP address to
 connect to it (using ssh etc). The program logic relies on the target
-address (some_external_address) being routable, so if you're running
+address in external_IP_and_port being routable, so if you're running
 this on a network not connected to the Internet or lacking a default
-route you'll need to alter some_external_address to an address that
+route you'll need to alter external_IP_and_port to use an address that
 the Pi can reach on your network.
 
 It should be helpful for workshops using Raspberry Pis with Sense Hats

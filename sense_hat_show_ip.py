@@ -5,10 +5,11 @@ The intended usage is as a program that can be included during startup
 of a Raspberry Pi with Sense Hat attached, enabling the Pi to announce
 its' IP address so that a remote system can use the IP address to
 connect to it (using ssh etc). The program logic relies on the target
-address (some_external_address) being routable, so if you're running
-this on a network not connected to the Internet or lacking a default
-route you'll need to alter some_external_address to an address that
-the Pi can reach on your network.
+address being routable, so if you're running this on a network not
+connected to the Internet or lacking a default route you'll need
+to alter external_IP_and_port to use an address that the Pi can reach
+on your network. I've chosen one of the root-servers for the DNS (DNS
+queries use port 53), thus the values in external_IP_and_port.
 
 It should be helpful for workshops using Raspberry Pis with Sense Hats
 allowing the Pis to be used 'headless' via ssh - which is what I wrote
@@ -53,7 +54,7 @@ class _IP(object):  # (object) for Python2-compatibility
         """
         try:
             s = socket.socket(self.socket_family, socket.SOCK_DGRAM)
-            s.connect(self.some_external_address)
+            s.connect(self.external_IP_and_port)
             answer = s.getsockname()
             s.close()
             return answer[0] if answer else None
@@ -66,17 +67,17 @@ class _IP(object):  # (object) for Python2-compatibility
 
 
 class IPv4(_IP):
-    # I think no actual network communication occurs, so the actual value
-    # of some_external_address is moot unless unroutable,
-    some_external_address = ('198.41.0.4', 53)  # a.root-servers.net
+    # I think no actual network communication occurs, so the actual address
+    # in external_IP_and_port is moot unless unroutable,
+    external_IP_and_port = ('198.41.0.4', 53)  # a.root-servers.net
     socket_family = socket.AF_INET
     description = "IPv4"
 
 
 class IPv6(_IP):
-    # I think no actual network communication occurs, so the actual value
-    # of some_external_address is moot unless unroutable,
-    some_external_address = ('2001:503:ba3e::2:30', 53)  # a.root-servers.net
+    # I think no actual network communication occurs, so the actual address
+    # in external_IP_and_port is moot unless unroutable,
+    external_IP_and_port = ('2001:503:ba3e::2:30', 53)  # a.root-servers.net
     socket_family = socket.AF_INET6
     description = "IPv6"
 
